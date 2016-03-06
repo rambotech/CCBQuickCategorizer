@@ -1,0 +1,8 @@
+C:\src\BOG\Private\CCBQuickCategorizer\QuickCategorizeDL\bin\Release\QuickCategorizeDL.dll
+C:\src\BOG\Private\CCBQuickCategorizer\QuickCategorizeDL\bin\Release\QuickCategorizeDL.pdb
+C:\src\BOG\Private\CCBQuickCategorizer\QuickCategorizeDL\bin\Release\BOG.Framework.dll
+C:\src\BOG\Private\CCBQuickCategorizer\QuickCategorizeDL\bin\Release\BOG.Framework.pdb
+C:\src\BOG\Private\CCBQuickCategorizer\QuickCategorizeDL\bin\Release\BOG.Framework.xml
+C:\src\BOG\Private\CCBQuickCategorizer\QuickCategorizeDL\obj\Release\QuickCategorizeDL.csprojResolveAssemblyReference.cache
+C:\src\BOG\Private\CCBQuickCategorizer\QuickCategorizeDL\obj\Release\QuickCategorizeDL.dll
+C:\src\BOG\Private\CCBQuickCategorizer\QuickCategorizeDL\obj\Release\QuickCategorizeDL.pdb

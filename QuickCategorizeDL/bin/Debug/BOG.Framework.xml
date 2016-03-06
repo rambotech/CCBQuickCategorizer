@@ -1,0 +1,375 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BOG.Framework</name>
+    </assembly>
+    <members>
+        <member name="T:BOG.Framework.BabbleOn">
+            <summary>
+            This class is intended to be integrated into a windows/web service.  It establishes a TCP listener on a port, 
+            and allows one or more simple TCP clients (including telnet clients) to connect and receive text traffic about 
+            the code's activity/inactivity. It is intended for debugging/troubleshooting a service's activity, without
+            permanent logging.
+            The low port defaults to 65200, and the high port defaults to 65500.  The can be overridden by creating appSettings
+            in a config file of BabbleOn.LowPort and BabbleOn.HighPort.
+            The ports available for monitoring can be determined with the Babbler console application.
+            </summary>
+        </member>
+        <member name="M:BOG.Framework.ConfigSettingsResolver.#ctor">
+            <summary>
+            Determines the operating arena (usually local_*, test, stage, production) for ensuring
+            the proper settings are extracted from the configuration file.  Allows a specific machine
+            name, or a default (*) to determine the Arena.
+            </summary>
+        </member>
+        <member name="M:BOG.Framework.ConfigSettingsResolver.ResolveAppSettingValue(System.String)">
+            <summary>
+            Get an appSetting value by key, first trying a specific setting for the machine,
+            (keyName.Arena), falling back to a non-machine-specific key (keyName) if not.
+            Throws an error if neither key exists.
+            </summary>
+            <param name="keyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BOG.Framework.ConfigSettingsResolver.ResolveConnectionString(System.String)">
+            <summary>
+            Get a connectionString value by key, first trying a specific setting for the machine,
+            (keyName.Arena), falling back to a non-machine-specific key (keyName) if not.
+            Throws an error if neither key exists.
+            </summary>
+            <param name="keyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BOG.Framework.DetailedException.StripUidPwd(System.String,System.String)">
+            <summary>
+            Attempts to remove username and/or password in a URL or connection string
+            and substitute the values with "[contents:hidden]" (for URLs) or 
+            [contents hidden] for a connection string.  Allows URL or connection strings
+            with embedded credentials to be included in a log entry, and not introduce
+            a possible compromise of security because of the entry.
+            </summary>
+            <param name="value">The string to examine.</param>
+            <param name="delimiter">for connection strings,or other token=value representation only:
+            represents a list of the character(s) which delimit each token=value entry.</param>
+            <returns>The value with any detected credentials overwritten.</returns>
+        </member>
+        <member name="M:BOG.Framework.DetailedException.WithEnteriseContent(System.Exception@,System.String,System.String)">
+            <summary>
+            WithEnteriseContent() is a method for providing full detail on the application and 
+            system environment, and is best suited when reporting an exception to a
+            central server, or via general distribution, where
+            the system reporting the error can not be assumed.
+            </summary>
+            <param name="ReportException">a reference to the exception</param>
+            <param name="headerMessage">optional text to prefix to the error report.</param>
+            <param name="footerMessage">optional text to suffix to the error report.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BOG.Framework.DetailedException.WithEnteriseContent(System.Exception@)">
+            <summary>
+            WithEnteriseContent() is a method for providing full detail on the application and 
+            system environment, and is best suited when reporting an exception to a
+            central server, or via general distribution, where
+            the system reporting the error can not be assumed.
+            </summary>
+            <param name="ReportException">a reference to the exception</param>
+            <returns></returns>
+        </member>
+        <member name="M:BOG.Framework.DetailedException.WithMachineContent(System.Exception@,System.String,System.String)">
+            <summary>
+            WithMachineContent() is a method for providing only application detail, and is best suited when reporting 
+            an exception is isolated to the event log or a local file on the workstation or server where it occurs.
+            Unlike WithEnterpriseContent(), it omits system name, OS, processor and memory information.
+            </summary>
+            <param name="ReportException">a reference to the exception</param>
+            <param name="headerMessage">optional text to prefix to the error report.</param>
+            <param name="footerMessage">optional text to suffix to the error report.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BOG.Framework.DetailedException.WithMachineContent(System.Exception@)">
+            <summary>
+            WithMachineContent() is a method for providing only application detail, and is best suited when reporting 
+            an exception is isolated to the event log or a local file on the workstation or server where it occurs.
+            Unlike WithEnterpriseContent(), it omits system name, OS, processor and memory information.
+            </summary>
+            <param name="ReportException">a reference to the exception</param>
+            <returns></returns>
+        </member>
+        <member name="M:BOG.Framework.DetailedException.WithUserContent(System.Exception@,System.String,System.String)">
+            <summary>
+            WithUserContent() is a method for providing only error detail, and is best suited 
+            for non-fatal errors or other trapped errors reported on the console or in a dialog
+            directly to an interactive user.  It also contains no timestamping.
+            </summary>
+            <param name="ReportException">a reference to the exception</param>
+            <param name="headerMessage">optional text to prefix to the error report.</param>
+            <param name="footerMessage">optional text to suffix to the error report.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BOG.Framework.DetailedException.WithUserContent(System.Exception@)">
+            <summary>
+            WithUserContent() is a method for providing only error detail, and is best suited 
+            for non-fatal errors or other trapped errors reported on the console or in a dialog
+            directly to an interactive user.  It also contains no timestamping.
+            </summary>
+            <param name="ReportException">a reference to the exception</param>
+            <returns></returns>
+        </member>
+        <member name="M:BOG.Framework.Fuse.RecordFuseEvent(System.Single)">
+            <summary>
+            Records a fuse activity.
+            </summary>
+            <param name="volume">(float) the amount of activity to record.</param>
+            <returns>true if the fuse has been tripped due to excessive hits/volume (as
+            defined in the behavior setting), or false if under limits.</returns>
+        </member>
+        <member name="T:BOG.Framework.Logger">
+            <summary>
+            Supports logging to text files in a folder, using timestamped patterns in the file name.
+            Rollover occurs when the file exceeds a designated size, or a maximum freshness timeframe.
+            </summary>
+        </member>
+        <member name="M:BOG.Framework.Logger.#ctor">
+            <summary>
+            Initialize with defaults.
+            - Folder is the temporary folder on the drive with the most available free space.
+            - Filename pattern is Log_YYYYMMDD_HHMMSS.txt
+            - Maximum file size is 150K
+            - Maximum time before forcing rollover to a new file is one hour.
+            </summary>
+        </member>
+        <member name="M:BOG.Framework.Logger.#ctor(System.String,System.String,System.Int32,System.Int64)">
+            <summary>
+            Initialize with specific arguments
+            </summary>
+            <param name="messageFilePath">The folder to store the files.</param>
+            <param name="messageFilePattern">The pattern to use for string.Format() to create a file name.
+            Use {0} or {0:...} to format the DateTime.Now argument supplied.  E.g.: MyAppLog_{0:yyyyMMdd_HHmmss}.txt</param>
+            <param name="maxSeconds">The number of seconds after creation when the current file in use must be closed,
+            and a new file created.  Use 0 for indefinite.</param>
+            <param name="maxSize">The maximm number of bytes written to a file, before the file in use must be closed,
+            and a new file created.  Use 0L for not size limit.  NOTE: the value is a threshold, and the actual</param>
+        </member>
+        <member name="T:BOG.Framework.NTGroup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BOG.Framework.NTGroup.ItemsWithinList(System.String[],System.String[],System.Boolean,System.Boolean)">
+            <summary>
+            Compare items in list B, with items in list A.  If any item in list B matches any item in list A, return true.
+            Primarily designed to test a user's group memberships against a list of qualifying memberships.  E.g.
+            Bob is a member of Geeks and Leaders.  When compared to the allowed groups of Users and Nerds, it returns false.
+            Compared to Users and Geeks, it returns to true.
+            </summary>
+            <param name="baseItems">string array of items</param>
+            <param name="matchItems">string array of items</param>
+            <param name="ignoreCase">self-explanatory</param>
+            <param name="matchAll">when true, all items in list B must have a match in list A, for the result to be true.</param>
+            <returns>true when the matching criteria are met, or false if not.</returns>
+        </member>
+        <member name="T:BOG.Framework.PasswordHash">
+            <summary>
+            Salted password hashing with PBKDF2-SHA1.
+            Author: havoc AT defuse.ca
+            www: http://crackstation.net/hashing-security.htm
+            Compatibility: .NET 3.0 and later.
+            </summary>
+        </member>
+        <member name="M:BOG.Framework.PasswordHash.CreateHash(System.String)">
+            <summary>
+            Creates a salted PBKDF2 hash of the password.
+            </summary>
+            <param name="password">The password to hash.</param>
+            <returns>The hash of the password.</returns>
+        </member>
+        <member name="M:BOG.Framework.PasswordHash.ValidatePassword(System.String,System.String)">
+            <summary>
+            Validates a password given a hash of the correct one.
+            </summary>
+            <param name="password">The password to check.</param>
+            <param name="correctHash">A hash of the correct password.</param>
+            <returns>True if the password is correct. False otherwise.</returns>
+        </member>
+        <member name="M:BOG.Framework.PasswordHash.SlowEquals(System.Byte[],System.Byte[])">
+            <summary>
+            Compares two byte arrays in length-constant time. This comparison
+            method is used so that password hashes cannot be extracted from
+            on-line systems using a timing attack and then attacked off-line.
+            </summary>
+            <param name="a">The first byte array.</param>
+            <param name="b">The second byte array.</param>
+            <returns>True if both byte arrays are equal. False otherwise.</returns>
+        </member>
+        <member name="M:BOG.Framework.PasswordHash.PBKDF2(System.String,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Computes the PBKDF2-SHA1 hash of a password.
+            </summary>
+            <param name="password">The password to hash.</param>
+            <param name="salt">The salt.</param>
+            <param name="iterations">The PBKDF2 iteration count.</param>
+            <param name="outputBytes">The length of the hash to generate, in bytes.</param>
+            <returns>A hash of the password.</returns>
+        </member>
+        <member name="T:BOG.Framework.ProcessChecker">
+            <summary>
+            Check running processes for an already-running instance. Implements a simple and
+            always effective algorithm to find currently running processes with a main window
+            matching a given substring and focus it.
+            Combines code written by Lion Shi (MS) and Sam Allen.
+            </summary>
+        </member>
+        <member name="F:BOG.Framework.ProcessChecker._requiredString">
+            <summary>
+            Stores a required string that must be present in the window title for it
+            to be detected.
+            </summary>
+        </member>
+        <member name="T:BOG.Framework.ProcessChecker.NativeMethods">
+            <summary>
+            Contains signatures for C++ DLLs using interop.
+            </summary>
+        </member>
+        <member name="M:BOG.Framework.ProcessChecker.EnumWindowsProc(System.IntPtr,System.Int32)">
+            <summary>
+            Perform finding and showing of running window.
+            </summary>
+            <returns>Bool, which is important and must be kept to match up
+            with system call.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:BOG.Framework.ProcessChecker.IsOnlyProcess(System.String)" -->
+        <member name="T:BOG.Framework.MemoryItem">
+            <summary>
+            An Item which is retained in the list, but marked as consumed.
+            Allows a unique list, even if an item has been previously read.
+            </summary>
+        </member>
+        <member name="M:BOG.Framework.MemoryItem.#ctor">
+            <summary>
+            Thisi initialize is only for the use of an XMLSerializers
+            </summary>
+        </member>
+        <member name="T:BOG.Framework.ObjectXMLSerializer`1">
+            <summary>
+            Provides XML serialization/deserialization functionality.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:BOG.Framework.SettingsDictionary">
+            <summary>
+            An alternative to using the app.config file format.  A generic dictionary, with save 
+            and load.  Can also merge from setting from another SettingsDictionary instance.
+            </summary>
+        </member>
+        <member name="P:BOG.Framework.SettingsDictionary.ConfigurationFile">
+            <summary>
+            The file where the settings are persisted.
+            </summary>
+        </member>
+        <member name="M:BOG.Framework.SettingsDictionary.#ctor">
+            <summary>
+            Default instantiation
+            </summary>
+        </member>
+        <member name="M:BOG.Framework.SettingsDictionary.#ctor(System.String)">
+            <summary>
+            Specify the configuration file to persist for this instance.
+            The method does not actually load from the file during instantiation.
+            </summary>
+            <param name="configurationFile"></param>
+        </member>
+        <member name="M:BOG.Framework.SettingsDictionary.LoadSettings">
+            <summary>
+            Loads the settings from the configuration file.  Existing settings are removed
+            prior to load.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:BOG.Framework.SettingsResolution" -->
+        <member name="M:BOG.Framework.SettingsResolution.#ctor">
+            <summary>
+            Determines the operating arena (usually local_*, test, stage, production) for ensuring
+            the proper settings are extracted from the configuration file.  Allows a specific machine
+            name, or a default (*) to determine the Arena.
+            </summary>
+        </member>
+        <member name="M:BOG.Framework.SettingsResolution.ResolveArena">
+            <summary>
+            Resolves the arena defined for the specific machine name, which may come from
+            a default of * for the arena, if the specific machine name does not exist.
+            Throws an error if the specific machine name does not appear (e.g. ARENA.machinename), 
+            *AND* a default arena (ARENA.*) is not defined.
+            </summary>
+            <param name="machineName"></param>
+        </member>
+        <member name="M:BOG.Framework.SettingsResolution.ResolveArena(System.Collections.Specialized.StringDictionary@)">
+            <summary>
+            Resolves the arena defined for the specific machine name, which may come from
+            a default of * for the arena, if the specific machine name does not exist.
+            Throws an error if the specific machine name does not appear (e.g. ARENA.machinename), 
+            *AND* a default arena (ARENA.*) is not defined.  This overload resolves the arena
+            for the StringDictionary referenced: not the app.config file.
+            </summary>
+            <param name="machineName"></param>
+        </member>
+        <member name="M:BOG.Framework.SettingsResolution.ResolveAppSettingValue(System.String)">
+            <summary>
+            Get an appSetting value by key, first trying a specific setting for the machine,
+            (keyName.Arena), falling back to a non-machine-specific key (keyName) if not.
+            Throws an error if neither key exists.
+            </summary>
+            <param name="keyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BOG.Framework.SettingsResolution.ResolveConnectionString(System.String)">
+            <summary>
+            Get a connectionString value by key, first trying a specific setting for the machine,
+            (keyName.Arena), falling back to a non-machine-specific key (keyName) if not.
+            Throws an error if neither key exists.
+            </summary>
+            <param name="keyName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BOG.Framework.StringEx">
+            <summary>
+            Provides enhanced string functionality
+            </summary>
+        </member>
+        <member name="M:BOG.Framework.StringEx.WildcardIndexOfAnyString(System.String,System.String,System.Int32,System.Boolean,System.Char)">
+            <summary>
+            Searches a string for a match, but allows question marks to act like a wildcard and match any
+            character.
+            </summary>
+            <param name="core"></param>
+            <param name="search"></param>
+            <param name="startAt"></param>
+            <param name="ignoreCase"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BOG.Framework.StringEx.QuotedTrim(System.String,System.Char[],System.Char)">
+            <summary>
+            Trims a string which is enclosed by quotes.  The quotes and the left-side and right-side whitespace 
+            from the enclosed string is removed.
+            E.g.  " \" ex \" " becomes "ex"
+            </summary>
+            <param name="search">The string to be trimed</param>
+            <param name="whitespace">array of characters defining whitespace characters</param>
+            <param name="quote">The character to treat as a quotation.</param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:BOG.Framework.StringEx.TextAsInnerText(System.String)" -->
+        <member name="M:BOG.Framework.StringEx.Base64DecodeString(System.String)">
+            <summary>
+            Decodes a string containing Base64 to an unencoded string
+            </summary>
+            <param name="inputStr">Base64 compliant string</param>
+            <returns></returns>
+        </member>
+        <member name="M:BOG.Framework.StringEx.ManuallyParseCommandLine(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="commandLineArgs"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
