@@ -1,0 +1,1 @@
+# CCBQuickCategorizer
