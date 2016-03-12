@@ -40,9 +40,9 @@ If you are going to bulk categorize your exsiting transactions in CCB, it involv
 - Using Tools/ Import the categorized export file you added transactions to.
 
 ## DANGER Will Robinson!
-There is a shortcoming as of today (3/7/2016) to be aware ofin Clear Checkbook. The web application will not add 
+There is a shortcoming as of today (3/7/2016) to be aware of in Clear Checkbook. The web application will not add 
 an imported transaction with an amount of zero.  While this may not seem like a problem, I personally log a voided check 
-in CCB as VOID in the Payee with an amount of zero to have a full record of my checks online.  That includes my errors.
+in CCB as VOID in the Payee with an amount of zero to have a full record of my checks' serial numbers.  That includes my errors.
 If you have anything like this in your transactions, they will not show back up in the transaction register after deleting 
 the transactions and importing your categorized file.
 
