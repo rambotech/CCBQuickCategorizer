@@ -19,14 +19,13 @@ has the time to bring this type of functionality in the main website.
 If you are an experienced developer who wants to have everything including source code, you know what to do.
 
 If you have a Windows laptop or desktop and just want to use the application to categorize, do the following:
-- In the file list above, right-click on the file CCBQuickCategorizer_User.zip
-- In the pop-up menu, select the open that says "Save link as" (Chrome) or whatever is similar for the browser.
-- In the dialog, select a place to put it.  (Desktop will work just fine)
-- Once the download completes, open Windows Explorer and go to the place you saved the file in, in the step above.
+- Click the "Download ZIP" button above.  This will start the download to your downloads folder.
+- Open your downloads folder in Windows Explorer, and locate the downloaded file.
 - Right-click on the file, and select "Extract All..."
-- In the dialog which appears, tick the checkbox labeled "Show extracted files when complete", and click the Extract button.
-- In the new Windows Explorer which was opened, look for a file named CCBQuickCategorizer.exe
-- Double-click that file to start the program.
+- In the dialog which appears, click the Browse button and select the desktop.  Tick the checkbox labeled "Show extracted files when complete", and click the Extract button.
+- Go to your desktop and open the folder named "CCBQuickCategorizer-master", then open the folder "CCBQuickCategorizer_User" in the list.
+- Look for a file named CCBQuickCategorizer.exe
+- Double-click that file to start the program.  You will need to double-click the import and export file names, and navigate to this folder to select clearcheckbook.csv for the export file, and ccb_import.csv for the import file.
 
 There will be a quick video introduction available soon.
 
