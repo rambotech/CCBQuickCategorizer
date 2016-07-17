@@ -8,7 +8,7 @@ This is a tool I wrote for my own end-of-year categorization, and is not written
 
 As of the time I posted this project to GitHub, it worked without any problems or errors.  I won't support it: I don't get paid for that.  Make backups of any file you are going to edit, prior to working with that file in the application.
 
-Clear Checkbook has been very responsive to its users, and has made improvements to auto categorizing.  Please view this application as having a limited lifespan and only filling a gap, until Clear Checkbook has the time to bring this type of functionality in the main website.
+Clear Checkbook has been very responsive to its users, and has made improvements to auto categorizing.  Please view this application as having a limited lifespan and only filling a gap, until Clear Checkbook has the time to add this type of functionality in the main website.
 
 ## Installing The Application
 If you are an experienced developer who wants to have everything including source code, you know what to do.
