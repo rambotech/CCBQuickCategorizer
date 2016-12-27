@@ -367,8 +367,8 @@ namespace CCBQuickCategorizer
                 this.dataGridView1.Refresh();
                 return;
             }
-            // launch a Google search on either the Description or Payee column, whichever is clicked.
-            if (e.ColumnIndex == 1 || e.ColumnIndex == 4)
+			// launch a Google search on either the Description or Payee column, whichever is clicked.
+			if (e.ColumnIndex == 1 || e.ColumnIndex == 4)
             {
                 string URLtemplate = "https://www.google.com/search?q={0}";
                 string URL = string.Format(
@@ -379,7 +379,7 @@ namespace CCBQuickCategorizer
             }
         }
 
-        private void frmQuickCategorize_FormClosing(object sender, FormClosingEventArgs e)
+		private void frmQuickCategorize_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (UnsavedChangesExist)
             {
@@ -470,5 +470,5 @@ namespace CCBQuickCategorizer
             this.txtImportFilename.Enabled = this.chkEditingAnImportFile.Checked;
             AdjustFilenameColors();
         }
-    }
+	}
 }
