@@ -2,7 +2,7 @@
 
 A Windows desktop application for Clear Checkbook (CCB) users.  It enables bulk categorization of a CSV export file containing all transactions.  It can also enable bulk-categorization of transactions in an import file, if you use import files (my guess is that most people don't).
 
-##Motivation
+## Motivation
 
 This is a tool I wrote for my own end-of-year categorization, and is not written or supported by Clear Checkbook. I am making it available for other CCB users who also have expressed a desire for a faster way to add categories to transactions, so use it at your own risk.
 
@@ -34,11 +34,8 @@ If you are going to bulk categorize your exsiting transactions in CCB, it involv
 ## DANGER Will Robinson!
 There is a shortcoming as of today (3/7/2016) to be aware of in Clear Checkbook. The web application will not add an imported transaction with an amount of zero.  While this may not seem like a problem, I personally log a voided check in CCB as VOID in the Payee with an amount of zero to have a full record of my checks' serial numbers.  That includes my errors. If you have anything like this in your transactions, they will not show back up in the transaction register after deleting the transactions and importing your categorized file.  They will have to be re-added manually.
 
-##Checking Your Work
+## Checking Your Work
 
 The best way to double check your work is to re-export ALL transactions after importing the categorized file, thenand compare the number of lines in the original export (which was categorized and imported) against the re-exported content. If the number of lines matches, you should be good.  If not, use a spreadsheet or a diff tool (like WinMerge) to compare the two files and see where the differences are.
 
 In my case, in over 1,400 transactions that I categorized for a year, I only had seven transactions not imported. And they were all voided check entries.
-
-
-
