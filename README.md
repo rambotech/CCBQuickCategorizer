@@ -36,6 +36,6 @@ There is a shortcoming as of today (3/7/2016) to be aware of in Clear Checkbook.
 
 ## Checking Your Work
 
-The best way to double check your work is to re-export ALL transactions after importing the categorized file, thenand compare the number of lines in the original export (which was categorized and imported) against the re-exported content. If the number of lines matches, you should be good.  If not, use a spreadsheet or a diff tool (like WinMerge) to compare the two files and see where the differences are.
+The best way to double check your work is to re-export ALL transactions after importing the categorized file, then compare the number of lines in the original export (which was categorized and imported) against the re-exported content. If the number of lines matches, you should be good.  If not, use a spreadsheet or a diff tool (like WinMerge) to compare the two files and see where the differences are.
 
 In my case, in over 1,400 transactions that I categorized for a year, I only had seven transactions not imported. And they were all voided check entries.
