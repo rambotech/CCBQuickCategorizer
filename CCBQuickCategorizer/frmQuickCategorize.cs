@@ -1,16 +1,11 @@
-﻿using System;
+﻿using BOG.Framework;
+using QuickCategorizeDL;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
-using BOG.Framework;
-using QuickCategorizeDL;
 
 namespace CCBQuickCategorizer
 {
@@ -32,6 +27,10 @@ namespace CCBQuickCategorizer
         public frmQuickCategorize()
         {
             InitializeComponent();
+
+            var info = new BOG.Framework.AssemblyVersion(true);
+            this.Text = this.Text + $" ({info.Version}, {info.BuildDate})";
+
             this.dataGridView1.ReadOnly = false;
             this.dataGridView1.Columns.Add(new DataGridViewTextBoxColumn());
             this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].Name = "Date(MM/DD/YYYY)";
@@ -356,7 +355,8 @@ namespace CCBQuickCategorizer
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 3 && this.lstboxCategory.SelectedIndex >= 0 && !this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].IsInEditMode)
+            var isInEdit = e.RowIndex >= 0 && e.ColumnIndex >= 0 && this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].IsInEditMode;
+            if (e.ColumnIndex == 3 && this.lstboxCategory.SelectedIndex >= 0 && !isInEdit)
             {
                 int ID = int.Parse(this.dataGridView1.Rows[e.RowIndex].Tag.ToString());
                 string category = this.lstboxCategory.Items[this.lstboxCategory.SelectedIndex].ToString();
@@ -368,7 +368,7 @@ namespace CCBQuickCategorizer
                 return;
             }
 			// launch a Google search on either the Description or Payee column, whichever is clicked.
-			if (e.ColumnIndex == 1 || e.ColumnIndex == 4)
+			if ((e.ColumnIndex == 1 || e.ColumnIndex == 4) && e.RowIndex >= 0 && !isInEdit)
             {
                 string URLtemplate = "https://www.google.com/search?q={0}";
                 string URL = string.Format(
