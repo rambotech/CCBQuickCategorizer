@@ -1,11 +1,7 @@
-﻿using System;
+﻿using BOG.Framework;
+using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using BOG.Framework;
 
 namespace QuickCategorizeDL
 {
