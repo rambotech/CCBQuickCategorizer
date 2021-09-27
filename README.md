@@ -1,3 +1,5 @@
+![alt text](https://github.com/rambotech/CCBQuickCategorizer/blob/master/Assets/us-dollar.png "A Winform for working with Clear Checkbook on Windows Linux and MacOS!")
+
 # CCBQuickCategorizer
 
 A Windows desktop application for Clear Checkbook (CCB) users.  It enables bulk categorization of a CSV export file containing all transactions.  It can also enable bulk-categorization of transactions in an import file, if you use import files (my guess is that most people don't).

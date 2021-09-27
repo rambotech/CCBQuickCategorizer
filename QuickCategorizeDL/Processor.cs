@@ -164,7 +164,7 @@ namespace QuickCategorizeDL
                     catch (Exception e1)
                     {
                         Console.WriteLine("Error parsing line #{0}:\r\n{1}\r\n\r\n{2}", LineIndex, RawLine,
-                            DetailedException.WithEnteriseContent(ref e1));
+                            DetailedException.WithEnterpriseContent(ref e1));
                         throw;
                     }
                 }

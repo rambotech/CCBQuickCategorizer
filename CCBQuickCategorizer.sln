@@ -15,6 +15,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dotnetcore31", "dotnetcore3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "framework472", "framework472", "{C911DC58-0D36-424A-ACA4-78C1D09059C3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Documentation", "_Documentation", "{6D4474F8-AE2B-471D-AA0A-06539CECC3B8}"
+	ProjectSection(SolutionItems) = preProject
+		History.txt = History.txt
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
