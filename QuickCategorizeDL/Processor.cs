@@ -1,4 +1,5 @@
 ﻿using BOG.Framework;
+using BOG.Framework.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
