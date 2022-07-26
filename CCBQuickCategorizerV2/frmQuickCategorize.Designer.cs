@@ -48,6 +48,7 @@ namespace CCBQuickCategorizerV2
 			this.chkboxHideCategorized = new System.Windows.Forms.CheckBox();
 			this.btnClearTransactionFilter = new System.Windows.Forms.Button();
 			this.txtTransactionFilter = new System.Windows.Forms.TextBox();
+			this.btnCatSummary = new System.Windows.Forms.Button();
 			this.btnAddCategory = new System.Windows.Forms.Button();
 			this.lstboxCategory = new System.Windows.Forms.ListBox();
 			this.lblCategoryList = new System.Windows.Forms.Label();
@@ -190,12 +191,13 @@ namespace CCBQuickCategorizerV2
 			// 
 			// splitContainer2.Panel2
 			// 
+			this.splitContainer2.Panel2.Controls.Add(this.btnCatSummary);
 			this.splitContainer2.Panel2.Controls.Add(this.btnAddCategory);
 			this.splitContainer2.Panel2.Controls.Add(this.lstboxCategory);
 			this.splitContainer2.Panel2.Controls.Add(this.lblCategoryList);
 			this.splitContainer2.Panel2.Controls.Add(this.btnClearCategoryFilter);
 			this.splitContainer2.Panel2.Controls.Add(this.txtCategoryFilter);
-			this.splitContainer2.Size = new System.Drawing.Size(1422, 524);
+			this.splitContainer2.Size = new System.Drawing.Size(1422, 519);
 			this.splitContainer2.SplitterDistance = 1075;
 			this.splitContainer2.SplitterWidth = 5;
 			this.splitContainer2.TabIndex = 0;
@@ -262,9 +264,10 @@ namespace CCBQuickCategorizerV2
 			this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.dataGridView1.Name = "dataGridView1";
 			this.dataGridView1.ReadOnly = true;
-			this.dataGridView1.Size = new System.Drawing.Size(1064, 453);
+			this.dataGridView1.Size = new System.Drawing.Size(1064, 448);
 			this.dataGridView1.TabIndex = 5;
 			this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
+			this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
 			this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
 			this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
 			this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
@@ -317,10 +320,22 @@ namespace CCBQuickCategorizerV2
 			this.txtTransactionFilter.TabIndex = 0;
 			this.txtTransactionFilter.TextChanged += new System.EventHandler(this.txtTransactionFilter_TextChanged);
 			// 
+			// btnCatSummary
+			// 
+			this.btnCatSummary.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnCatSummary.Location = new System.Drawing.Point(116, 36);
+			this.btnCatSummary.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.btnCatSummary.Name = "btnCatSummary";
+			this.btnCatSummary.Size = new System.Drawing.Size(106, 27);
+			this.btnCatSummary.TabIndex = 8;
+			this.btnCatSummary.Text = "Summary";
+			this.btnCatSummary.UseVisualStyleBackColor = true;
+			this.btnCatSummary.Click += new System.EventHandler(this.btnCatSummary_Click);
+			// 
 			// btnAddCategory
 			// 
 			this.btnAddCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnAddCategory.Location = new System.Drawing.Point(235, 31);
+			this.btnAddCategory.Location = new System.Drawing.Point(232, 35);
 			this.btnAddCategory.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.btnAddCategory.Name = "btnAddCategory";
 			this.btnAddCategory.Size = new System.Drawing.Size(106, 27);
@@ -339,7 +354,7 @@ namespace CCBQuickCategorizerV2
 			this.lstboxCategory.Location = new System.Drawing.Point(4, 69);
 			this.lstboxCategory.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.lstboxCategory.Name = "lstboxCategory";
-			this.lstboxCategory.Size = new System.Drawing.Size(333, 424);
+			this.lstboxCategory.Size = new System.Drawing.Size(328, 349);
 			this.lstboxCategory.Sorted = true;
 			this.lstboxCategory.TabIndex = 5;
 			this.lstboxCategory.SelectedIndexChanged += new System.EventHandler(this.lstboxCategory_SelectedIndexChanged);
@@ -358,10 +373,10 @@ namespace CCBQuickCategorizerV2
 			// 
 			this.btnClearCategoryFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnClearCategoryFilter.Enabled = false;
-			this.btnClearCategoryFilter.Location = new System.Drawing.Point(235, 2);
+			this.btnClearCategoryFilter.Location = new System.Drawing.Point(230, 2);
 			this.btnClearCategoryFilter.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.btnClearCategoryFilter.Name = "btnClearCategoryFilter";
-			this.btnClearCategoryFilter.Size = new System.Drawing.Size(106, 23);
+			this.btnClearCategoryFilter.Size = new System.Drawing.Size(106, 27);
 			this.btnClearCategoryFilter.TabIndex = 2;
 			this.btnClearCategoryFilter.Text = "Clear Filter";
 			this.btnClearCategoryFilter.UseVisualStyleBackColor = true;
@@ -374,7 +389,7 @@ namespace CCBQuickCategorizerV2
 			this.txtCategoryFilter.Location = new System.Drawing.Point(4, 3);
 			this.txtCategoryFilter.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.txtCategoryFilter.Name = "txtCategoryFilter";
-			this.txtCategoryFilter.Size = new System.Drawing.Size(223, 23);
+			this.txtCategoryFilter.Size = new System.Drawing.Size(218, 23);
 			this.txtCategoryFilter.TabIndex = 2;
 			this.txtCategoryFilter.TextChanged += new System.EventHandler(this.txtCategoryFilter_TextChanged);
 			// 
@@ -455,6 +470,7 @@ namespace CCBQuickCategorizerV2
 		private System.Windows.Forms.Label lblAllTimeExportSource;
 		private System.Windows.Forms.ToolTip toolTip1;
 		private System.Windows.Forms.CheckBox chkEditingAnImportFile;
+		private System.Windows.Forms.Button btnCatSummary;
 	}
 }
 

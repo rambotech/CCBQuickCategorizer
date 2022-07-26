@@ -1,7 +1,17 @@
+1.0.5.0 -- 2022-07-26
+- Add ability to exclude a transaction from the output when saved.
+
+1.0.4.0 -- 2021-11-28
+- Adds a summary dialog to show the totals per category
+- Updates the status bar text to show total in, total out and summary total of changes.
+- Microsoft says no support for the Winforms outside of Windows. Bummer.
+- Dropped the framework472 project.
+- dotnetcore31 is now upgraded to net50.
+
 1.0.3.0 -- 2020-09-25
 - Update original version to Framework 4.7.2
 - Create v2 projects for .NET Core 3.1 LTS.
-  - Can not ye run in Linux or MacOS, but that should be (hopefully) be added soon.
+  - Can not yet run in Linux or MacOS, but that should be (hopefully) be added soon.
 
 1.0.2.0 -- 2019-07-2019
 - Double click on payee or description opens Google Search for that value.

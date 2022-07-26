@@ -179,7 +179,15 @@ namespace QuickCategorizeDLV2
 				if (useImportFormat)
 				{
 					sw.Write("Date,Amount,Description,Category,Account,Jive,Check,Payee,Memo\r\n");
-					foreach (CCBTransaction t in transactions)
+				}
+				else
+				{
+					sw.Write("Date(MM/DD/YYYY),Amount,Description,Category,Account,Jived,Check Number,Payee,Memo,User,\n");
+				}
+
+				foreach (var t in transactions)
+				{
+					if (useImportFormat)
 					{
 						sw.Write(string.Format("{0:MM/dd/yyyy},", t.Date));
 						sw.Write(string.Format(t.Amount == 0.0 ? "-{0:f}," : "{0:f},", t.Amount));
@@ -192,11 +200,7 @@ namespace QuickCategorizeDLV2
 						sw.Write(string.Format("{0},", t.Memo));
 						sw.Write("\r\n");
 					}
-				}
-				else
-				{
-					sw.Write("Date(MM/DD/YYYY),Amount,Description,Category,Account,Jived,Check Number,Payee,Memo,User,\n");
-					foreach (CCBTransaction t in transactions)
+					else
 					{
 						sw.Write(string.Format("{0:MM/dd/yyyy},", t.Date));
 						sw.Write(string.Format(t.Amount == 0.0 ? "-{0:f}," : "{0:f},", t.Amount));
