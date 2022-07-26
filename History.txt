@@ -1,3 +1,8 @@
+1.0.5.1 -- 2022-07-26
+- Format Transaction Amount in grid as currency
+- Format Transaction Date in grid as MM/dd/yyyy
+- Zero out ID file for each file load
+
 1.0.5.0 -- 2022-07-26
 - Add ability to exclude a transaction from the output when saved.
 

@@ -105,6 +105,8 @@ namespace QuickCategorizeDLV2
 			bool UseLFonly = FullFile.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).Length
 				< FullFile.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).Length;
 
+			IDcounter = 0;
+
 			foreach (string RawLine in FullFile.Split(
 				UseLFonly ? new string[] { "\n" } : new string[] { "\r\n" },
 				StringSplitOptions.RemoveEmptyEntries))

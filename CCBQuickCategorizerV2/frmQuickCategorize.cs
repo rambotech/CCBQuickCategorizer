@@ -13,18 +13,18 @@ namespace CCBQuickCategorizerV2
 	{
 		private enum FieldIndex : int
 		{
-			Date = 0,
-			Payee = 1,
-			Memo = 2,
-			Category = 3,
-			Description = 4,
-			Amount = 5,
-			Account = 6,
-			Jived = 7,
-			CheckNumber = 8,
-			User = 9,
-			Exclude = 10,
-			ID = 11
+			ID = 0,
+			Date = 1,
+			Payee = 2,
+			Memo = 3,
+			Category = 4,
+			Description = 5,
+			Amount = 6,
+			Account = 7,
+			Jived = 8,
+			CheckNumber = 9,
+			User = 10,
+			Exclude = 11,
 		}
 
 		Dictionary<int, CCBTransaction> transactions = new Dictionary<int, CCBTransaction>();
@@ -50,10 +50,18 @@ namespace CCBQuickCategorizerV2
 			this.dataGridView1.ReadOnly = false;
 
 			this.dataGridView1.Columns.Add(new DataGridViewTextBoxColumn());
-			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].Name = "Date(MM/DD/YYYY)";
+			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].Name = "ID";
+			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].ReadOnly = true;
+			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].SortMode = DataGridViewColumnSortMode.Automatic;
+			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].ValueType = typeof(int);
+			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].Visible = true;
+
+			this.dataGridView1.Columns.Add(new DataGridViewTextBoxColumn());
+			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].Name = "Date";
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].ReadOnly = true;
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].SortMode = DataGridViewColumnSortMode.Automatic;
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].ValueType = typeof(string);
+			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].DefaultCellStyle.Format = "d";
 
 			this.dataGridView1.Columns.Add(new DataGridViewTextBoxColumn());
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].Name = "Payee";
@@ -84,6 +92,7 @@ namespace CCBQuickCategorizerV2
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].ReadOnly = true;
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].SortMode = DataGridViewColumnSortMode.Automatic;
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].ValueType = typeof(decimal);
+			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].DefaultCellStyle.Format = "c";
 
 			this.dataGridView1.Columns.Add(new DataGridViewTextBoxColumn());
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].Name = "Account";
@@ -114,13 +123,6 @@ namespace CCBQuickCategorizerV2
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].ReadOnly = false;
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].SortMode = DataGridViewColumnSortMode.NotSortable;
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].ValueType = typeof(bool);
-
-			this.dataGridView1.Columns.Add(new DataGridViewTextBoxColumn());
-			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].Name = "ID";
-			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].ReadOnly = true;
-			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].SortMode = DataGridViewColumnSortMode.NotSortable;
-			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].ValueType = typeof(int);
-			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].Visible = false;
 
 			this.btnSave.Enabled = false;
 			sd.ConfigurationFile = this.LastSettingsConfigurationFile;
@@ -169,7 +171,8 @@ namespace CCBQuickCategorizerV2
 				CCBTransaction t = transactions[i];
 				DataGridViewRow r = new DataGridViewRow();
 				r.CreateCells(this.dataGridView1);
-				r.Cells[(int)FieldIndex.Date].Value = t.Date.ToString("d");
+				r.Cells[(int)FieldIndex.ID].Value = t.ID;
+				r.Cells[(int)FieldIndex.Date].Value = t.Date;
 				r.Cells[(int)FieldIndex.Payee].Value = t.Payee;
 				r.Cells[(int)FieldIndex.Memo].Value = t.Memo;
 				r.Cells[(int)FieldIndex.Category].Value = t.Category;
@@ -180,20 +183,7 @@ namespace CCBQuickCategorizerV2
 				r.Cells[(int)FieldIndex.CheckNumber].Value = t.CheckNumber;
 				r.Cells[(int)FieldIndex.User].Value = t.User;
 				r.Cells[(int)FieldIndex.Exclude].Value = false;
-				r.Cells[(int)FieldIndex.ID].Value = t.ID;
 
-				//r.SetValues(new string[] {
-				//	t.Date.ToString("d"),
-				//	t.Payee,
-				//	t.Memo,
-				//	t.Category,
-				//	t.Description,
-				//	t.Amount.ToString("f"),
-				//	t.Account,
-				//	t.Jived.ToString(),
-				//	t.CheckNumber,
-				//	t.User,
-				//	"false"});
 				r.Visible = true;
 				this.dataGridView1.Rows.Add(r);
 				this.btnSelectedUncategorizedTransactions.Enabled = this.dataGridView1.Rows.Count > 0;
