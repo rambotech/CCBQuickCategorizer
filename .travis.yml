@@ -1,5 +1,5 @@
 language: csharp
-project: ./CCBQuickCategorizer.sln
+solution: ./CCBQuickCategorizer.sln
 mono: none
 dotnet: 5.0.2
 script:
