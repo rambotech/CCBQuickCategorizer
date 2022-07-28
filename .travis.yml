@@ -1,7 +1,7 @@
 language: csharp
 solution: ./CCBQuickCategorizer.sln
 mono: none
-dotnet: 5.0.2
+dotnet: 6.0.302
 script:
 - chmod +x ./deploy.sh 
 - ./deploy.sh
