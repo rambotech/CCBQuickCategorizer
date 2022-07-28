@@ -3,8 +3,8 @@ solution: ./CCBQuickCategorizer.sln
 mono: none
 dotnet: 6.0.302
 script:
-- chmod +x ./deploy.sh 
-- ./deploy.sh
+- chmod +x ./build_me.sh 
+- ./build_me.sh
 
 # safelist
 branches:
