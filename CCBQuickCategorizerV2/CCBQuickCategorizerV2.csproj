@@ -4,11 +4,11 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <Version>1.0.5.1</Version>
+    <Version>1.0.5.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BOG.SwissArmyKnife" Version="1.7.8" />
+    <PackageReference Include="BOG.SwissArmyKnife" Version="1.7.10" />
   </ItemGroup>
 
   <ItemGroup>

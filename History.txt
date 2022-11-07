@@ -1,7 +1,11 @@
+1.0.5.2 -- 2022-11-06
+- Set column width to autosize for data content.
+
 1.0.5.1 -- 2022-07-26
 - Format Transaction Amount in grid as currency
 - Format Transaction Date in grid as MM/dd/yyyy
 - Zero out ID file for each file load
+- net5 is now upgraded to net6.
 
 1.0.5.0 -- 2022-07-26
 - Add ability to exclude a transaction from the output when saved.
@@ -11,7 +15,7 @@
 - Updates the status bar text to show total in, total out and summary total of changes.
 - Microsoft says no support for the Winforms outside of Windows. Bummer.
 - Dropped the framework472 project.
-- dotnetcore31 is now upgraded to net50.
+- dotnetcore31 is now upgraded to net5.
 
 1.0.3.0 -- 2020-09-25
 - Update original version to Framework 4.7.2

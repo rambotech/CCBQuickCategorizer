@@ -1,11 +1,5 @@
-![alt text](https://github.com/rambotech/CCBQuickCategorizer/blob/master/Assets/us-dollar.png "A Winform for working with Clear Checkbook on Windows Linux and MacOS!")
+![alt text](https://github.com/rambotech/CCBQuickCategorizer/blob/master/Assets/us-dollar-16.png "A Winform for working with Clear Checkbook on Windows Linux and MacOS!")
 
-
-| *branch* | CCBQuickCategorizer |
-| :--- | :---: |
-| master    | [![Build status](https://api.travis-ci.com/rambotech/CCBQuickCategorizer.svg?branch=master)](https://travis-ci.com/rambotech/CCBQuickCategorizer) |
-| release   | [![Build status](https://api.travis-ci.com/rambotech/CCBQuickCategorizer.svg?branch=release)](https://travis-ci.com/rambotech/CCBQuickCategorizer) |
-| develop   | [![Build status](https://api.travis-ci.com/rambotech/CCBQuickCategorizer.svg?branch=develop)](https://travis-ci.com/rambotech/CCBQuickCategorizer) |
 
 # CCBQuickCategorizer
 
