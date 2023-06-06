@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Web;
 using System.Windows.Forms;
 
@@ -77,7 +78,7 @@ namespace CCBQuickCategorizerV2
 
 			this.dataGridView1.Columns.Add(new DataGridViewTextBoxColumn());
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].Name = "Category";
-			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].ReadOnly = false;
+			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].ReadOnly = true;
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].SortMode = DataGridViewColumnSortMode.Automatic;
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].ValueType = typeof(string);
 
@@ -160,8 +161,8 @@ namespace CCBQuickCategorizerV2
 			this.dataGridView1.Enabled = allowUse;
 			this.chkEditingAnImportFile.Enabled = allowUse;
 			this.txtAllTimeExportFilename.Enabled = allowUse;
-			//this
-
+			this.btnSave.Enabled = UnsavedChangesExist;
+			this.btnLoad.Enabled = UnsavedChangesExist;
 		}
 
 		private void LoadTransactions()
@@ -205,41 +206,48 @@ namespace CCBQuickCategorizerV2
 				var memo = (string)thisRow.Cells[(int)FieldIndex.Memo].Value;
 				var payee = (string)thisRow.Cells[(int)FieldIndex.Payee].Value;
 
-				if (this.chkboxHideCategorized.Checked && !string.IsNullOrEmpty(category)) continue;
-				if (this.chkboxHideUncategorized.Checked && string.IsNullOrEmpty(category)) continue;
-
-				bool ShowThis = true;
-				while (!string.IsNullOrEmpty(this.txtTransactionFilter.Text.Trim()))
+				var ShowThis = true;
+				do // trap door sequence
 				{
-					ShowThis = false;
-					if (description.IndexOf(this.txtTransactionFilter.Text, StringComparison.InvariantCultureIgnoreCase) >= 0)
+					if (this.chkboxHideCategorized.Checked && !string.IsNullOrEmpty(category))
 					{
-						ShowThis = true;
+						ShowThis = false;
 						break;
 					}
-					if (memo.IndexOf(this.txtTransactionFilter.Text, StringComparison.InvariantCultureIgnoreCase) >= 0)
+
+					if (this.chkboxHideUncategorized.Checked && string.IsNullOrEmpty(category))
 					{
-						ShowThis = true;
+						ShowThis = false;
 						break;
 					}
-					if (payee.IndexOf(this.txtTransactionFilter.Text, StringComparison.InvariantCultureIgnoreCase) >= 0)
+
+					if (!string.IsNullOrEmpty(this.txtTransactionFilter.Text.Trim()))
 					{
-						ShowThis = true;
+						if (  // no filter text found...
+							(description.IndexOf(this.txtTransactionFilter.Text, StringComparison.InvariantCultureIgnoreCase) < 0) &&
+							(memo.IndexOf(this.txtTransactionFilter.Text, StringComparison.InvariantCultureIgnoreCase) < 0) &&
+							(category.IndexOf(this.txtTransactionFilter.Text, StringComparison.InvariantCultureIgnoreCase) < 0) &&
+							(payee.IndexOf(this.txtTransactionFilter.Text, StringComparison.InvariantCultureIgnoreCase) < 0)
+						)
+						{
+							ShowThis = false;
+							break;
+						}
 					}
-					break;
-				}
+				} while (false);
+
+				thisRow.Visible = ShowThis;
 				if (ShowThis)
 				{
 					ItemCount++;
-					thisRow.Visible = ShowThis;
 				}
-				this.btnSelectedUncategorizedTransactions.Enabled = this.dataGridView1.Rows.Count > 0;
 			}
-			this.toolStripStatusLabel1.Text = string.Format("({0} transactions {1} filters)",
+			this.btnSelectedUncategorizedTransactions.Enabled = this.dataGridView1.Rows.Count > 0;
+			this.toolStripStatusLabel1.Text = string.Format("({0} transactions: {1})",
 				ItemCount,
 				this.txtTransactionFilter.Text.Trim().Length > 0 ||
 				this.chkboxHideCategorized.Checked ||
-				this.chkboxHideUncategorized.Checked ? "with" : "without");
+				this.chkboxHideUncategorized.Checked ? "filtered" : "unfiltered");
 		}
 
 		private void ShowCategories()
@@ -258,8 +266,21 @@ namespace CCBQuickCategorizerV2
 			}
 		}
 
+		private bool UserConfirmedLossOfChange()
+		{
+			return
+					MessageBox.Show(
+						"There are unsaved changes to the categories. If you continue with this action, you will lose any changes.\r\n\r\n" +
+						"Are you sure you don't want to save those changes?",
+						"WHOA... not so fast!", MessageBoxButtons.OKCancel) == DialogResult.Cancel;
+		}
+
 		private void btnLoad_Click(object sender, EventArgs e)
 		{
+			if (UnsavedChangesExist && !UserConfirmedLossOfChange())
+			{
+				return;
+			}
 			this.toolStripStatusLabel1.Text = "Loading all-time export file ...";
 			this.chkboxHideCategorized.Checked = false;
 			this.chkboxHideUncategorized.Checked = false;
@@ -399,16 +420,7 @@ namespace CCBQuickCategorizerV2
 
 		private void btnApplySelectedCategoryToSelectedTransactions_Click(object sender, EventArgs e)
 		{
-			UnsavedChangesExist |= this.dataGridView1.SelectedRows.Count > 0;
-			for (int i = 0; i < this.dataGridView1.SelectedRows.Count; i++)
-			{
-				UnsavedChangesExist = true;
-				int ID = (int)this.dataGridView1.Rows[i].Cells[(int)FieldIndex.ID].Value;
-				transactions[ID].Category = (string)this.lstboxCategory.SelectedItem;
-			}
-			ShowTransactions(false);
-			this.btnSave.Enabled |= UnsavedChangesExist;
-			this.btnLoad.Enabled = true;
+			ApplyCategoryToSelectedTransactions();
 		}
 
 		private void txtTransactionFilter_TextChanged(object sender, EventArgs e)
@@ -438,8 +450,7 @@ namespace CCBQuickCategorizerV2
 
 		private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
-			var isInEdit = e.RowIndex >= 0 && e.ColumnIndex >= 0 && this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].IsInEditMode;
-			if (e.ColumnIndex == (int)FieldIndex.Category && this.lstboxCategory.SelectedIndex >= 0 && !isInEdit)
+			if (e.ColumnIndex == (int)FieldIndex.Category && this.lstboxCategory.SelectedIndex >= 0)
 			{
 				int ID = (int)this.dataGridView1.Rows[e.RowIndex].Cells[(int)FieldIndex.ID].Value;
 				string category = this.lstboxCategory.Items[this.lstboxCategory.SelectedIndex].ToString();
@@ -451,7 +462,7 @@ namespace CCBQuickCategorizerV2
 				return;
 			}
 			// launch a Google search on either the Description or Payee column, whichever is clicked.
-			if ((e.ColumnIndex == (int)FieldIndex.Description || e.ColumnIndex == (int)FieldIndex.Payee) && e.RowIndex >= 0 && !isInEdit)
+			if ((e.ColumnIndex == (int)FieldIndex.Description || e.ColumnIndex == (int)FieldIndex.Payee) && e.RowIndex >= 0)
 			{
 				string URLtemplate = "https://www.google.com/search?q={0}";
 				string URL = string.Format(
@@ -468,49 +479,15 @@ namespace CCBQuickCategorizerV2
 
 		private void frmQuickCategorize_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (UnsavedChangesExist)
+			if (!UnsavedChangesExist || UserConfirmedLossOfChange())
 			{
-				if (DialogResult.Cancel ==
-					MessageBox.Show(
-						"There are unsaved changes to the categories. If you exit now, you will lose these changes.\r\n\r\n" +
-						"Are you sure you don't want to save the changes?",
-						"WHOA... not so fast!", MessageBoxButtons.OKCancel))
-				{
-					e.Cancel = true;
-				}
+				sd.SetSetting("AllTimeExportFilename", this.txtAllTimeExportFilename.Text);
+				sd.SetSetting("ImportFilename", this.txtImportFilename.Text);
+				sd.SetSetting("EditAnImportFile", this.chkEditingAnImportFile.Checked ? "true" : "false");
+				sd.SaveSettings();
+				return;
 			}
-			sd.SetSetting("AllTimeExportFilename", this.txtAllTimeExportFilename.Text);
-			sd.SetSetting("ImportFilename", this.txtImportFilename.Text);
-			sd.SetSetting("EditAnImportFile", this.chkEditingAnImportFile.Checked ? "true" : "false");
-			sd.SaveSettings();
-		}
-
-		private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-		{
-			if (e.ColumnIndex == (int)FieldIndex.Category)
-			{
-				CellOriginalValue = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-			}
-		}
-
-		private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-		{
-			if (e.ColumnIndex == (int)FieldIndex.Category)
-			{
-				if (this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == null)
-				{
-					this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = string.Empty;
-				}
-				if (string.Compare(CellOriginalValue, this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), false) != 0)
-				{
-					int ID = (int)this.dataGridView1.Rows[e.RowIndex].Cells[(int)FieldIndex.ID].Value;
-
-					string category = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-					transactions[ID].Category = category;
-					UnsavedChangesExist = true;
-					this.btnSave.Enabled = true;
-				}
-			}
+			e.Cancel = true;
 		}
 
 		private void btnRefresh_Click(object sender, EventArgs e)
@@ -582,7 +559,38 @@ namespace CCBQuickCategorizerV2
 				return;
 			}
 		}
+
+		private void ApplyCategoryToSelectedTransactions()
+		{
+			if (this.lstboxCategory.SelectedItems.Count == 1 && this.dataGridView1.SelectedRows.Count > 0)
+			{
+				if (this.dataGridView1.SelectedRows.Count > 1)
+				{
+					if (DialogResult.No == MessageBox.Show("Apply this category to multiple transactions?", "Multiple Transactions", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+					{
+						return;
+					}
+				}
+				for (var rowIndex = 0; rowIndex < this.dataGridView1.Rows.Count; rowIndex++)
+				{
+					if (!this.dataGridView1.Rows[rowIndex].Selected) continue;
+					int ID = (int)this.dataGridView1.Rows[rowIndex].Cells[(int)FieldIndex.ID].Value;
+					string category = this.lstboxCategory.Items[this.lstboxCategory.SelectedIndex].ToString();
+					this.dataGridView1.Rows[rowIndex].Cells[(int)FieldIndex.Category].Value = category;
+					transactions[ID].Category = category;
+					UnsavedChangesExist = true;
+				}
+				this.btnSave.Enabled |= UnsavedChangesExist;
+				this.dataGridView1.Refresh();
+				this.btnLoad.Enabled = true;
+
+			}
+		}
+
+		// DOuble click of category to apply to one or more selected transactions.
+		private void lstboxCategory_DoubleClick(object sender, EventArgs e)
+		{
+			ApplyCategoryToSelectedTransactions();
+		}
 	}
 }
-
-
