@@ -39,6 +39,7 @@ namespace CCBQuickCategorizerV2
 		SettingsDictionary sd = new SettingsDictionary();
 		bool UnsavedChangesExist = false;
 		string CellOriginalValue = string.Empty;
+		Color CellDefaultBackColor = Color.White;
 		Color OriginalBackgroundColor = Color.White;
 
 		public frmQuickCategorize()
@@ -81,6 +82,7 @@ namespace CCBQuickCategorizerV2
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].ReadOnly = true;
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].SortMode = DataGridViewColumnSortMode.Automatic;
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].ValueType = typeof(string);
+			CellDefaultBackColor = this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].DefaultCellStyle.BackColor;
 
 			this.dataGridView1.Columns.Add(new DataGridViewTextBoxColumn());
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].Name = "Description";
@@ -162,7 +164,7 @@ namespace CCBQuickCategorizerV2
 			this.chkEditingAnImportFile.Enabled = allowUse;
 			this.txtAllTimeExportFilename.Enabled = allowUse;
 			this.btnSave.Enabled = UnsavedChangesExist;
-			this.btnLoad.Enabled = UnsavedChangesExist;
+			this.btnLoad.Text = UnsavedChangesExist ? "&Undo Changes" : "&Load";
 		}
 
 		private void LoadTransactions()
@@ -252,7 +254,7 @@ namespace CCBQuickCategorizerV2
 
 		private void ShowCategories()
 		{
-			this.lstboxCategory.Items.Clear();
+			var matchingItems = new Dictionary<int, string>();
 			foreach (string category in categories.Keys)
 			{
 				if (!string.IsNullOrEmpty(this.txtCategoryFilter.Text.Trim()))
@@ -262,24 +264,38 @@ namespace CCBQuickCategorizerV2
 						continue;
 					}
 				}
-				this.lstboxCategory.Items.Add(category);
+				matchingItems.Add(matchingItems.Count, category);
+			}
+			this.lstboxCategory.Enabled = matchingItems.Count > 0;
+			if (this.lstboxCategory.Enabled)
+			{
+				this.lstboxCategory.Items.Clear();
+				for (var index = 0; index < matchingItems.Count - 1; index++)
+				{
+					this.lstboxCategory.Items.Add(matchingItems[index]);
+				}
 			}
 		}
 
-		private bool UserConfirmedLossOfChange()
+		private DialogResult UserChangeAction()
 		{
 			return
 					MessageBox.Show(
-						"There are unsaved changes to the categories. If you continue with this action, you will lose any changes.\r\n\r\n" +
-						"Are you sure you don't want to save those changes?",
-						"WHOA... not so fast!", MessageBoxButtons.OKCancel) == DialogResult.Cancel;
+						"Would you like to save the changes before continuing?\r\n\r\n" +
+						"There are unsaved changes here",
+						"WHOA... not so fast!", MessageBoxButtons.YesNoCancel);
 		}
 
 		private void btnLoad_Click(object sender, EventArgs e)
 		{
-			if (UnsavedChangesExist && !UserConfirmedLossOfChange())
+			if (UnsavedChangesExist)
 			{
-				return;
+				// action is Undo Changes
+				var userResponse = MessageBox.Show(
+						"This will revert everything to the current file content, losing all changes\r\n\r\n" +
+						"Continue?",
+						"WHOA... not so fast!", MessageBoxButtons.OKCancel);
+				if (userResponse == DialogResult.Cancel) return;
 			}
 			this.toolStripStatusLabel1.Text = "Loading all-time export file ...";
 			this.chkboxHideCategorized.Checked = false;
@@ -336,14 +352,14 @@ namespace CCBQuickCategorizerV2
 			}
 			ShowTransactions(true);
 			this.toolStripStatusLabel1.Text = "CSV file loaded";
-			this.btnLoad.Enabled = false;
 			this.btnSave.Enabled = false;
 			this.txtAllTimeExportFilename.Enabled = false;
 			this.txtImportFilename.Enabled = false;
 			UnsavedChangesExist = false;
+			ObjectEnabling(true);
 		}
 
-		private void btnSave_Click(object sender, EventArgs e)
+		private void SaveContent()
 		{
 			this.toolStripStatusLabel1.Text = "Saving CSV file...";
 			this.statusStrip1.Refresh();
@@ -351,6 +367,7 @@ namespace CCBQuickCategorizerV2
 			for (var rowIndex = 0; rowIndex < this.dataGridView1.Rows.Count; rowIndex++)
 			{
 				var thisRow = this.dataGridView1.Rows[rowIndex];
+				thisRow.Cells[(int)FieldIndex.Category].Style.BackColor = CellDefaultBackColor;
 				if (!(bool)thisRow.Cells[(int)FieldIndex.Exclude].Value)
 				{
 					trans.Add(transactions[(int)thisRow.Cells[(int)FieldIndex.ID].Value]);
@@ -359,9 +376,13 @@ namespace CCBQuickCategorizerV2
 			Processor dl = new Processor();
 			dl.SaveCSV(trans, this.txtImportFilename.Text, this.chkEditingAnImportFile.Checked);
 			this.toolStripStatusLabel1.Text = "CSV file saved";
-			this.btnLoad.Enabled = true;
 			this.btnSave.Enabled = false;
 			UnsavedChangesExist = false;
+		}
+
+		private void btnSave_Click(object sender, EventArgs e)
+		{
+			SaveContent();
 		}
 
 		private void chkboxHideCategorized_CheckedChanged(object sender, EventArgs e)
@@ -479,15 +500,26 @@ namespace CCBQuickCategorizerV2
 
 		private void frmQuickCategorize_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (!UnsavedChangesExist || UserConfirmedLossOfChange())
+			if (UnsavedChangesExist)
 			{
-				sd.SetSetting("AllTimeExportFilename", this.txtAllTimeExportFilename.Text);
-				sd.SetSetting("ImportFilename", this.txtImportFilename.Text);
-				sd.SetSetting("EditAnImportFile", this.chkEditingAnImportFile.Checked ? "true" : "false");
-				sd.SaveSettings();
-				return;
+				switch (UserChangeAction())
+				{
+					case DialogResult.Yes:
+						SaveContent();
+						break;
+
+					case DialogResult.No:
+						break;
+
+					case DialogResult.Cancel:
+						e.Cancel = true;
+						return;
+				}
 			}
-			e.Cancel = true;
+			sd.SetSetting("AllTimeExportFilename", this.txtAllTimeExportFilename.Text);
+			sd.SetSetting("ImportFilename", this.txtImportFilename.Text);
+			sd.SetSetting("EditAnImportFile", this.chkEditingAnImportFile.Checked ? "true" : "false");
+			sd.SaveSettings();
 		}
 
 		private void btnRefresh_Click(object sender, EventArgs e)
@@ -571,19 +603,31 @@ namespace CCBQuickCategorizerV2
 						return;
 					}
 				}
+				string category = this.lstboxCategory.Items[this.lstboxCategory.SelectedIndex].ToString();
+#if FALSE
 				for (var rowIndex = 0; rowIndex < this.dataGridView1.Rows.Count; rowIndex++)
 				{
 					if (!this.dataGridView1.Rows[rowIndex].Selected) continue;
+					if (string.Compare((string)this.dataGridView1.Rows[rowIndex].Cells[(int)FieldIndex.Category].Value, category, true) == 0) continue;
 					int ID = (int)this.dataGridView1.Rows[rowIndex].Cells[(int)FieldIndex.ID].Value;
-					string category = this.lstboxCategory.Items[this.lstboxCategory.SelectedIndex].ToString();
 					this.dataGridView1.Rows[rowIndex].Cells[(int)FieldIndex.Category].Value = category;
+					this.dataGridView1.Rows[rowIndex].Cells[(int)FieldIndex.Category].Style.BackColor = Color.Yellow;
 					transactions[ID].Category = category;
 					UnsavedChangesExist = true;
 				}
+#else
+				for (var rowIndex = 0; rowIndex < this.dataGridView1.SelectedRows.Count; rowIndex++)
+				{
+					if (string.Compare((string)this.dataGridView1.SelectedRows[rowIndex].Cells[(int)FieldIndex.Category].Value, category, true) == 0) continue;
+					int ID = (int)this.dataGridView1.SelectedRows[rowIndex].Cells[(int)FieldIndex.ID].Value;
+					this.dataGridView1.SelectedRows[rowIndex].Cells[(int)FieldIndex.Category].Value = category;
+					this.dataGridView1.SelectedRows[rowIndex].Cells[(int)FieldIndex.Category].Style.BackColor = Color.Yellow;
+					transactions[ID].Category = category;
+					UnsavedChangesExist = true;
+				}
+#endif
 				this.btnSave.Enabled |= UnsavedChangesExist;
 				this.dataGridView1.Refresh();
-				this.btnLoad.Enabled = true;
-
 			}
 		}
 
