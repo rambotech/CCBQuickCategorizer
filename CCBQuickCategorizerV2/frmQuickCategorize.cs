@@ -255,11 +255,12 @@ namespace CCBQuickCategorizerV2
 		private void ShowCategories()
 		{
 			var matchingItems = new Dictionary<int, string>();
+			var filterIsUsed = !string.IsNullOrWhiteSpace(this.txtCategoryFilter.Text);
 			foreach (string category in categories.Keys)
 			{
-				if (!string.IsNullOrEmpty(this.txtCategoryFilter.Text.Trim()))
+				if (filterIsUsed)
 				{
-					if (category.IndexOf(this.txtCategoryFilter.Text, StringComparison.InvariantCultureIgnoreCase) < 0)
+					if (category.IndexOf(this.txtCategoryFilter.Text, StringComparison.OrdinalIgnoreCase) < 0)
 					{
 						continue;
 					}
@@ -270,7 +271,7 @@ namespace CCBQuickCategorizerV2
 			if (this.lstboxCategory.Enabled)
 			{
 				this.lstboxCategory.Items.Clear();
-				for (var index = 0; index < matchingItems.Count - 1; index++)
+				for (var index = 0; index < matchingItems.Count; index++)
 				{
 					this.lstboxCategory.Items.Add(matchingItems[index]);
 				}
@@ -631,10 +632,10 @@ namespace CCBQuickCategorizerV2
 			}
 		}
 
-		// DOuble click of category to apply to one or more selected transactions.
 		private void lstboxCategory_DoubleClick(object sender, EventArgs e)
 		{
-			ApplyCategoryToSelectedTransactions();
+			this.txtCategoryFilter.Text = this.lstboxCategory.Text;
+			this.txtCategoryFilter.SelectAll();
 		}
 	}
 }

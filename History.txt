@@ -1,3 +1,6 @@
+1.0.6.2 -- 2023-09-14
+- Fixed bug in category filtering.
+
 1.0.6.1 -- 2023-07-10
 - Fixed closing behavior
 - Better, more helpful display when adding new category via filter text box.
