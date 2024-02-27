@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <Version>1.0.6.2</Version>
+    <Version>1.0.6.3</Version>
   </PropertyGroup>
 
   <ItemGroup>

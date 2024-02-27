@@ -104,7 +104,7 @@ namespace CCBQuickCategorizerV2
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].ValueType = typeof(string);
 
 			this.dataGridView1.Columns.Add(new DataGridViewCheckBoxColumn());
-			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].Name = "Jived";
+			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].Name = "Changed";
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].ReadOnly = true;
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].SortMode = DataGridViewColumnSortMode.NotSortable;
 			this.dataGridView1.Columns[this.dataGridView1.Columns.Count - 1].ValueType = typeof(bool);

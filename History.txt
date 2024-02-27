@@ -1,3 +1,6 @@
+1.0.6.3 -- 2024-02-26
+- Adjust Jive headers to Cleared: reaction to CCB import and export change.
+
 1.0.6.2 -- 2023-09-14
 - Fixed bug in category filtering.
 

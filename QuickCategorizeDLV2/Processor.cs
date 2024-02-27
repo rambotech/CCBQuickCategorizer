@@ -138,7 +138,7 @@ namespace QuickCategorizeDLV2
 									ColumnValues[ColumnMapping["Description"]],
 									ColumnValues[ColumnMapping["Category"]],
 									ColumnValues[ColumnMapping["Account"]],
-									ColumnValues[ColumnMapping["Jive"]] == "yes" ? true : false,
+									ColumnValues[ColumnMapping["Cleared"]] == "yes" ? true : false,
 									ColumnValues[ColumnMapping["Check"]],
 									ColumnValues[ColumnMapping["Payee"]],
 									ColumnValues[ColumnMapping["Memo"]],
@@ -155,7 +155,7 @@ namespace QuickCategorizeDLV2
 									ColumnValues[ColumnMapping["Description"]],
 									ColumnValues[ColumnMapping["Category"]],
 									ColumnValues[ColumnMapping["Account"]],
-									ColumnValues[ColumnMapping["Jived"]] == "yes" ? true : false,
+									ColumnValues[ColumnMapping["Cleared"]] == "yes" ? true : false,
 									ColumnValues[ColumnMapping["Check Number"]],
 									ColumnValues[ColumnMapping["Payee"]],
 									ColumnValues[ColumnMapping["Memo"]],
@@ -180,11 +180,11 @@ namespace QuickCategorizeDLV2
 			{
 				if (useImportFormat)
 				{
-					sw.Write("Date,Amount,Description,Category,Account,Jive,Check,Payee,Memo\r\n");
+					sw.Write("Date,Amount,Description,Category,Account,Cleared,Check,Payee,Memo\r\n");
 				}
 				else
 				{
-					sw.Write("Date(MM/DD/YYYY),Amount,Description,Category,Account,Jived,Check Number,Payee,Memo,User,\n");
+					sw.Write("Date(MM/DD/YYYY),Amount,Description,Category,Account,Cleared,Check Number,Payee,Memo,User,\n");
 				}
 
 				foreach (var t in transactions)
