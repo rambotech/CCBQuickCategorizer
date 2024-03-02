@@ -180,7 +180,7 @@ namespace QuickCategorizeDLV2
 			{
 				if (useImportFormat)
 				{
-					sw.Write("Date,Amount,Description,Category,Account,Cleared,Check,Payee,Memo\r\n");
+					sw.Write("Date,Amount,Description,Category,Account,Jived,Check,Payee,Memo\r\n");
 				}
 				else
 				{
