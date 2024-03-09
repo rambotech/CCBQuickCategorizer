@@ -10,7 +10,7 @@ namespace QuickCategorizeDLV2
 	//    string Description = string.Empty;
 	//    string Category = string.Empty;
 	//    string Account = string.Empty;
-	//    bool Jived = false;
+	//    bool Clerared = false;
 	//    string CheckNumber = string.Empty;
 	//    string Payee = string.Empty;
 	//    string Memo = string.Empty;
@@ -25,7 +25,7 @@ namespace QuickCategorizeDLV2
 		private string _Description = string.Empty;
 		private string _Category = string.Empty;
 		private string _Account = string.Empty;
-		private bool _Jived = false;
+		private bool _Cleared = false;
 		private string _CheckNumber = string.Empty;
 		private string _Payee = string.Empty;
 		private string _Memo = string.Empty;
@@ -35,7 +35,7 @@ namespace QuickCategorizeDLV2
 		{
 		}
 
-		public CCBTransaction(int p_ID, DateTime p_Date, double p_Amount, string p_Description, string p_Category, string p_Account, bool p_Jived, string p_CheckNumber, string p_Payee, string p_Memo, string p_User)
+		public CCBTransaction(int p_ID, DateTime p_Date, double p_Amount, string p_Description, string p_Category, string p_Account, bool p_Cleared, string p_CheckNumber, string p_Payee, string p_Memo, string p_User)
 		{
 			this._ID = p_ID;
 			this._Date = p_Date;
@@ -43,7 +43,7 @@ namespace QuickCategorizeDLV2
 			this._Description = p_Description;
 			this._Category = p_Category;
 			this._Account = p_Account;
-			this._Jived = p_Jived;
+			this._Cleared = p_Cleared;
 			this._CheckNumber = p_CheckNumber;
 			this._Payee = p_Payee;
 			this._Memo = p_Memo;
@@ -63,7 +63,7 @@ namespace QuickCategorizeDLV2
 			this._Description = (string)p_obj[3];
 			this._Category = (string)p_obj[4];
 			this._Account = (string)p_obj[5];
-			this._Jived = (bool)p_obj[6];
+			this._Cleared = (bool)p_obj[6];
 			this._CheckNumber = (string)p_obj[7];
 			this._Payee = (string)p_obj[8];
 			this._Memo = (string)p_obj[9];
@@ -78,7 +78,7 @@ namespace QuickCategorizeDLV2
 			this._Description = p_obj.Description;
 			this._Category = p_obj.Category;
 			this._Account = p_obj.Account;
-			this._Jived = p_obj.Jived;
+			this._Cleared = p_obj.Cleared;
 			this._CheckNumber = p_obj.CheckNumber;
 			this._Payee = p_obj.Payee;
 			this._Memo = p_obj.Memo;
@@ -121,10 +121,10 @@ namespace QuickCategorizeDLV2
 			set { _Account = value; }
 		}
 
-		public bool Jived
+		public bool Cleared
 		{
-			get { return _Jived; }
-			set { _Jived = value; }
+			get { return _Cleared; }
+			set { _Cleared = value; }
 		}
 
 		public string CheckNumber

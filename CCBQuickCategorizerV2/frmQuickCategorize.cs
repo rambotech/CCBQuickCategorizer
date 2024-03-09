@@ -22,7 +22,7 @@ namespace CCBQuickCategorizerV2
 			Description = 5,
 			Amount = 6,
 			Account = 7,
-			Jived = 8,
+			Cleared = 8,
 			CheckNumber = 9,
 			User = 10,
 			Exclude = 11,
@@ -182,7 +182,7 @@ namespace CCBQuickCategorizerV2
 				r.Cells[(int)FieldIndex.Description].Value = t.Description;
 				r.Cells[(int)FieldIndex.Amount].Value = t.Amount;
 				r.Cells[(int)FieldIndex.Account].Value = t.Account;
-				r.Cells[(int)FieldIndex.Jived].Value = t.Jived;
+				r.Cells[(int)FieldIndex.Cleared].Value = t.Cleared;
 				r.Cells[(int)FieldIndex.CheckNumber].Value = t.CheckNumber;
 				r.Cells[(int)FieldIndex.User].Value = t.User;
 				r.Cells[(int)FieldIndex.Exclude].Value = false;
