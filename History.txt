@@ -1,3 +1,6 @@
+1.0.7.1 -- 2024-05-25
+- headers un-fixed (Cleared Status back to Jived)
+
 1.0.7.0 -- 2024-03-08
 - headers fixed.
 

@@ -138,7 +138,7 @@ namespace QuickCategorizeDLV2
                                     ColumnValues[ColumnMapping["Description"]],
                                     ColumnValues[ColumnMapping["Category"]],
                                     ColumnValues[ColumnMapping["Account"]],
-                                    ColumnValues[ColumnMapping["Cleared Status"]] == "yes" ? true : false,
+                                    ColumnValues[ColumnMapping["Jived"]] == "yes" ? true : false,
                                     ColumnValues[ColumnMapping["Check"]],
                                     ColumnValues[ColumnMapping["Payee"]],
                                     ColumnValues[ColumnMapping["Memo"]],
