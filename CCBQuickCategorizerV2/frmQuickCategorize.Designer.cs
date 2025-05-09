@@ -193,7 +193,7 @@ namespace CCBQuickCategorizerV2
             // splitContainer2.Panel2
             // 
             splitContainer2.Panel2.Controls.Add(splitContainer3);
-            splitContainer2.Size = new System.Drawing.Size(1422, 495);
+            splitContainer2.Size = new System.Drawing.Size(1422, 493);
             splitContainer2.SplitterDistance = 1075;
             splitContainer2.SplitterWidth = 5;
             splitContainer2.TabIndex = 0;
@@ -220,8 +220,8 @@ namespace CCBQuickCategorizerV2
             // splitContainer4.Panel2
             // 
             splitContainer4.Panel2.Controls.Add(dataGridView1);
-            splitContainer4.Size = new System.Drawing.Size(1075, 495);
-            splitContainer4.SplitterDistance = 71;
+            splitContainer4.Size = new System.Drawing.Size(1075, 493);
+            splitContainer4.SplitterDistance = 69;
             splitContainer4.TabIndex = 11;
             // 
             // btnRefresh
@@ -326,6 +326,7 @@ namespace CCBQuickCategorizerV2
             dataGridView1.AllowDrop = true;
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToResizeRows = false;
             dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -381,8 +382,8 @@ namespace CCBQuickCategorizerV2
             // splitContainer3.Panel2
             // 
             splitContainer3.Panel2.Controls.Add(lstboxCategory);
-            splitContainer3.Size = new System.Drawing.Size(342, 495);
-            splitContainer3.SplitterDistance = 71;
+            splitContainer3.Size = new System.Drawing.Size(342, 493);
+            splitContainer3.SplitterDistance = 69;
             splitContainer3.TabIndex = 9;
             // 
             // btnCatSummary
@@ -475,8 +476,8 @@ namespace CCBQuickCategorizerV2
             // toolStripStatusLabel1
             // 
             toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new System.Drawing.Size(254, 17);
-            toolStripStatusLabel1.Text = "Welcome to ClearCheckbook Quick Categorize";
+            toolStripStatusLabel1.Size = new System.Drawing.Size(283, 17);
+            toolStripStatusLabel1.Text = "Welcome to Quick Categorize (for ClearCheckbook )";
             // 
             // frmQuickCategorize
             // 

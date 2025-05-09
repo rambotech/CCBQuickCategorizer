@@ -1,7 +1,6 @@
-1.0.9.0 -- 2024-07-15
-** Bug fix: Ensure filter results list is enabled when the filter text is being used.
-** Change Edit an import file to be a combo-box select, or add.
-** Text re-singing.
+1.0.9.0 -- 2025-05-04
+- Bug fix: Ensure filter results list is enabled when the filter text is being used.
+- Add Summary form to show total amount imported from each category (multii-select rows for filtering).
 
 1.0.8.0 -- 2024-06-05
 - support for ctrl+mouse wheel font sizing.

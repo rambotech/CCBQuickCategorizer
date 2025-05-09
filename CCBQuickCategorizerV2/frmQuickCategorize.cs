@@ -580,7 +580,28 @@ namespace CCBQuickCategorizerV2
 
         private void btnCatSummary_Click(object sender, EventArgs e)
         {
-            var s = new frmSummary();
+            Dictionary<string, double> summary = new Dictionary<string, double>();
+            this.toolStripStatusLabel1.Text = "Displaying Category Summary...";
+            this.statusStrip1.Refresh();
+            for (var rowIndex = 0; rowIndex < this.dataGridView1.Rows.Count; rowIndex++)
+            {
+                var thisRow = this.dataGridView1.Rows[rowIndex];
+                if (!(bool)thisRow.Cells[(int)FieldIndex.Exclude].Value)
+                {
+                    var categoryName = (string)thisRow.Cells[(int)FieldIndex.Category].Value;
+                    var amount = (double)thisRow.Cells[(int)FieldIndex.Amount].Value;
+                    if (!summary.ContainsKey(categoryName))
+                    {
+                        summary.Add(categoryName, amount);
+                    }
+                    else
+                    {
+                        summary[categoryName] += amount;
+                    }
+                }
+            }
+
+            var s = new frmSummary(summary);
             s.ShowDialog();
         }
 
