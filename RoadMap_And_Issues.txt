@@ -1,0 +1,2 @@
+- When a text filter is applied, bulk applying of a catalog is going beyond the scope of the selected items.
+- Ability to target a google search at google.de, google.it, etc... instead of just google.com
