@@ -15,8 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionItems", "_Solution
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net8", "net8", "{597D291D-79BC-4616-B0D3-BAEF0F2E5414}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCBQuickCategorizerV2", "CCBQuickCategorizerV2\CCBQuickCategorizerV2.csproj", "{F99DA2EE-F4E1-D34E-74FD-DE7CA9AC4D2C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickCategorizeDLV2", "QuickCategorizeDLV2\QuickCategorizeDLV2.csproj", "{36A934C1-EBD8-6F06-01AE-7A5996961210}"
@@ -38,10 +36,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{F99DA2EE-F4E1-D34E-74FD-DE7CA9AC4D2C} = {597D291D-79BC-4616-B0D3-BAEF0F2E5414}
-		{36A934C1-EBD8-6F06-01AE-7A5996961210} = {597D291D-79BC-4616-B0D3-BAEF0F2E5414}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {004189D8-9953-4322-89F9-D79D4F200A50}
