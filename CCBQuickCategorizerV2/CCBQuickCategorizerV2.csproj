@@ -4,13 +4,14 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows10.0.20348.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <Version>1.0.9.0</Version>
-    <StartupObject>CCBQuickCategorizerV2.Program</StartupObject>
+    <Version>1.0.10.0</Version>
+		<!--<SelfContained>true</SelfContained>-->
+		<StartupObject>CCBQuickCategorizerV2.Program</StartupObject>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BOG.SwissArmyKnife" Version="1.9.0" />
+    <PackageReference Include="BOG.SwissArmyKnife" Version="1.10.0" />
   </ItemGroup>
 
   <ItemGroup>

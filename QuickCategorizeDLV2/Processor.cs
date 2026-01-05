@@ -138,7 +138,7 @@ namespace QuickCategorizeDLV2
                                     ColumnValues[ColumnMapping["Description"]],
                                     ColumnValues[ColumnMapping["Category"]],
                                     ColumnValues[ColumnMapping["Account"]],
-                                    ColumnValues[ColumnMapping["Jived"]] == "yes" ? true : false,
+                                    string.Compare(ColumnValues[ColumnMapping["Cleared"]], "Yes", true) == 0, 
                                     ColumnValues[ColumnMapping["Check"]],
                                     ColumnValues[ColumnMapping["Payee"]],
                                     ColumnValues[ColumnMapping["Memo"]],
@@ -155,7 +155,7 @@ namespace QuickCategorizeDLV2
                                     ColumnValues[ColumnMapping["Description"]],
                                     ColumnValues[ColumnMapping["Category"]],
                                     ColumnValues[ColumnMapping["Account"]],
-                                    ColumnValues[ColumnMapping["Cleared"]] == "yes" ? true : false,
+                                    string.Compare(ColumnValues[ColumnMapping["Cleared"]], "Yes", true) == 0, 
                                     ColumnValues[ColumnMapping["Check Number"]],
                                     ColumnValues[ColumnMapping["Payee"]],
                                     ColumnValues[ColumnMapping["Memo"]],
@@ -180,7 +180,7 @@ namespace QuickCategorizeDLV2
             {
                 if (useImportFormat)
                 {
-                    sw.Write("Date,Amount,Description,Category,Account,Jived,Check,Payee,Memo\r\n");
+                    sw.Write("Date,Amount,Description,Category,Account,Cleared,Check,Payee,Memo\r\n");
                 }
                 else
                 {
@@ -196,7 +196,7 @@ namespace QuickCategorizeDLV2
                         sw.Write(string.Format("\"{0}\",", t.Description));
                         sw.Write(string.Format("\"{0}\",", t.Category));
                         sw.Write(string.Format("{0},", t.Account));
-                        sw.Write(string.Format("{0},", t.Cleared ? "yes" : "0"));
+                        sw.Write(string.Format("{0},", t.Cleared ? "Yes" : "0"));
                         sw.Write(string.Format("{0},", t.CheckNumber));
                         sw.Write(string.Format("\"{0}\",", t.Payee));
                         sw.Write(string.Format("{0},", t.Memo));
@@ -209,7 +209,7 @@ namespace QuickCategorizeDLV2
                         sw.Write(string.Format("\"{0}\",", t.Description));
                         sw.Write(string.Format("\"{0}\",", t.Category));
                         sw.Write(string.Format("\"{0}\",", t.Account));
-                        sw.Write(string.Format("{0},", t.Cleared ? "yes" : "0"));
+                        sw.Write(string.Format("{0},", t.Cleared ? "Yes" : "0"));
                         sw.Write(string.Format("\"{0}\",", t.CheckNumber));
                         sw.Write(string.Format("\"{0}\",", t.Payee));
                         sw.Write(string.Format("\"{0}\",", t.Memo));

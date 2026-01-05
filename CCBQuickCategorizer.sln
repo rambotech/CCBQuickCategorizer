@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCBQuickCategorizerV2", "CC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickCategorizeDLV2", "QuickCategorizeDLV2\QuickCategorizeDLV2.csproj", "{52F063E1-6484-4FDD-A4F0-97D66A869D1C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dotnetcore31", "dotnetcore31", "{597D291D-79BC-4616-B0D3-BAEF0F2E5414}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net8", "net8", "{597D291D-79BC-4616-B0D3-BAEF0F2E5414}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Documentation", "_Documentation", "{6D4474F8-AE2B-471D-AA0A-06539CECC3B8}"
 	ProjectSection(SolutionItems) = preProject

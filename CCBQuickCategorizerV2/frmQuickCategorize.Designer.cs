@@ -181,7 +181,6 @@ namespace CCBQuickCategorizerV2
             // splitContainer2
             // 
             splitContainer2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            splitContainer2.IsSplitterFixed = true;
             splitContainer2.Location = new System.Drawing.Point(4, 3);
             splitContainer2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             splitContainer2.Name = "splitContainer2";
@@ -193,7 +192,7 @@ namespace CCBQuickCategorizerV2
             // splitContainer2.Panel2
             // 
             splitContainer2.Panel2.Controls.Add(splitContainer3);
-            splitContainer2.Size = new System.Drawing.Size(1422, 493);
+            splitContainer2.Size = new System.Drawing.Size(1422, 492);
             splitContainer2.SplitterDistance = 1075;
             splitContainer2.SplitterWidth = 5;
             splitContainer2.TabIndex = 0;
@@ -220,8 +219,8 @@ namespace CCBQuickCategorizerV2
             // splitContainer4.Panel2
             // 
             splitContainer4.Panel2.Controls.Add(dataGridView1);
-            splitContainer4.Size = new System.Drawing.Size(1075, 493);
-            splitContainer4.SplitterDistance = 69;
+            splitContainer4.Size = new System.Drawing.Size(1075, 492);
+            splitContainer4.SplitterDistance = 68;
             splitContainer4.TabIndex = 11;
             // 
             // btnRefresh
@@ -382,8 +381,8 @@ namespace CCBQuickCategorizerV2
             // splitContainer3.Panel2
             // 
             splitContainer3.Panel2.Controls.Add(lstboxCategory);
-            splitContainer3.Size = new System.Drawing.Size(342, 493);
-            splitContainer3.SplitterDistance = 69;
+            splitContainer3.Size = new System.Drawing.Size(342, 492);
+            splitContainer3.SplitterDistance = 68;
             splitContainer3.TabIndex = 9;
             // 
             // btnCatSummary
