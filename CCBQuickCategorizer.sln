@@ -3,12 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCBQuickCategorizerV2", "CCBQuickCategorizerV2\CCBQuickCategorizerV2.csproj", "{F985E64F-C749-46E9-9505-BE45C755DC5A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickCategorizeDLV2", "QuickCategorizeDLV2\QuickCategorizeDLV2.csproj", "{52F063E1-6484-4FDD-A4F0-97D66A869D1C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net8", "net8", "{597D291D-79BC-4616-B0D3-BAEF0F2E5414}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Documentation", "_Documentation", "{6D4474F8-AE2B-471D-AA0A-06539CECC3B8}"
 	ProjectSection(SolutionItems) = preProject
 		History.txt = History.txt
@@ -21,27 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionItems", "_Solution
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net8", "net8", "{597D291D-79BC-4616-B0D3-BAEF0F2E5414}"
+EndProject
 Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F985E64F-C749-46E9-9505-BE45C755DC5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F985E64F-C749-46E9-9505-BE45C755DC5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F985E64F-C749-46E9-9505-BE45C755DC5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F985E64F-C749-46E9-9505-BE45C755DC5A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{52F063E1-6484-4FDD-A4F0-97D66A869D1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{52F063E1-6484-4FDD-A4F0-97D66A869D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{52F063E1-6484-4FDD-A4F0-97D66A869D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{52F063E1-6484-4FDD-A4F0-97D66A869D1C}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{F985E64F-C749-46E9-9505-BE45C755DC5A} = {597D291D-79BC-4616-B0D3-BAEF0F2E5414}
-		{52F063E1-6484-4FDD-A4F0-97D66A869D1C} = {597D291D-79BC-4616-B0D3-BAEF0F2E5414}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {004189D8-9953-4322-89F9-D79D4F200A50}
