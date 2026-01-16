@@ -498,7 +498,12 @@ namespace CCBQuickCategorizerV2
                 string URLtemplate = "https://www.google.com/search?q={0}";
                 string URL = string.Format(
                     URLtemplate,
-                    HttpUtility.UrlEncode(((string)this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value)));
+                    HttpUtility.UrlEncode(
+                        "credit card charge \"" +
+                        (string)this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value +
+                        "\""
+                    )
+                );
 
                 var psi = new System.Diagnostics.ProcessStartInfo();
                 psi.UseShellExecute = true;

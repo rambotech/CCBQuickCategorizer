@@ -1,3 +1,7 @@
+1.0.11.0 -- 2026-01-15
+- Change Google search string to "Credit Card Charge from "{payee}" ... which provides 
+  more relevant results for "payee"
+
 1.0.10.0 -- 2025-10-26
 - Change splitter between transactions and category panels to non-fixed.
 - Treat "Yes" (case-sensitive) as true, and all else as false for cleared column.
