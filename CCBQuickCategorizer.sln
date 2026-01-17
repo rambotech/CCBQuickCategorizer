@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Documentation", "_Document
 	ProjectSection(SolutionItems) = preProject
 		History.txt = History.txt
 		README.md = README.md
+		RoadMap_And_Issues.txt = RoadMap_And_Issues.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionItems", "_SolutionItems", "{A39C1A3A-043E-4402-AAF6-1AE70517CA5A}"
