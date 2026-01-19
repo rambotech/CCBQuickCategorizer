@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows10.0.20348.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <Version>1.0.11.0</Version>
+    <Version>1.0.12.0</Version>
 		<!--<SelfContained>true</SelfContained>-->
 		<StartupObject>CCBQuickCategorizerV2.Program</StartupObject>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>

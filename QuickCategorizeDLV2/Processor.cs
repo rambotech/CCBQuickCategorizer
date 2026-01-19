@@ -138,7 +138,7 @@ namespace QuickCategorizeDLV2
                                     ColumnValues[ColumnMapping["Description"]],
                                     ColumnValues[ColumnMapping["Category"]],
                                     ColumnValues[ColumnMapping["Account"]],
-                                    string.Compare(ColumnValues[ColumnMapping["Cleared"]], "Yes", true) == 0, 
+                                    string.Compare(ColumnValues[ColumnMapping["Cleared Status"]], "Yes", true) == 0, 
                                     ColumnValues[ColumnMapping["Check"]],
                                     ColumnValues[ColumnMapping["Payee"]],
                                     ColumnValues[ColumnMapping["Memo"]],

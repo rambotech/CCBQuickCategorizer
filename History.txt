@@ -1,3 +1,6 @@
+1.0.12.0 -- 2026-01-15
+- Fix cleared column name to "Cleared Status" for import file and "Cleared" for CCB export file.  Fixes import column automap.
+
 1.0.11.0 -- 2026-01-15
 - Change Google search string to "Credit Card Charge from "{payee}" ... which provides 
   more relevant results for "payee"
