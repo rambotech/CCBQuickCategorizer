@@ -138,7 +138,7 @@ namespace QuickCategorizeDLV2
                                     ColumnValues[ColumnMapping["Description"]],
                                     ColumnValues[ColumnMapping["Category"]],
                                     ColumnValues[ColumnMapping["Account"]],
-                                    string.Compare(ColumnValues[ColumnMapping["Cleared Status"]], "Yes", true) == 0, 
+                                    string.Compare(ColumnValues[ColumnMapping["Jived"]], "Yes", true) == 0, 
                                     ColumnValues[ColumnMapping["Check"]],
                                     ColumnValues[ColumnMapping["Payee"]],
                                     ColumnValues[ColumnMapping["Memo"]],
@@ -180,7 +180,7 @@ namespace QuickCategorizeDLV2
             {
                 if (useImportFormat)
                 {
-                    sw.Write("Date,Amount,Description,Category,Account,Cleared,Check,Payee,Memo\r\n");
+                    sw.Write("Date,Amount,Description,Category,Account,Jived,Check,Payee,Memo\r\n");
                 }
                 else
                 {
